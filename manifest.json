@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "World Clock",
   "version": "1.0",
-  "description": "Local time and Madrid time at a glance",
+  "description": "Your local time and a second timezone of your choosing, at a glance",
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "World Clock"

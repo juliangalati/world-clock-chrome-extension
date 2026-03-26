@@ -1,11 +1,12 @@
 # World Clock Chrome Extension
 
-A Chrome extension that displays your local time alongside Madrid time at a glance.
+A Chrome extension that displays your local time alongside a second timezone of your choosing.
 
 ## Features
 
 - Shows local time with automatic timezone label
-- Shows Madrid time (Europe/Madrid)
+- Shows a configurable second timezone (choose from 40 major cities)
+- Hover tooltip shows both times at a glance
 - Updates every second
 - Clean dark UI
 
