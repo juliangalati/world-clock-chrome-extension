@@ -2,6 +2,12 @@
 
 A Chrome extension that displays your local time alongside a second timezone of your choosing.
 
+## Screenshots
+
+| Light | Dark |
+|-------|------|
+| ![Light mode](screenshots/light.png) | ![Dark mode](screenshots/dark.png) |
+
 ## Features
 
 - Shows local time with automatic timezone label
