@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  pack-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write signing key
+        run: printf '%s' "$EXTENSION_KEY" > key.pem
+        env:
+          EXTENSION_KEY: ${{ secrets.EXTENSION_KEY }}
+
+      - name: Copy extension files
+        run: |
+          mkdir /tmp/extension
+          cp manifest.json background.js /tmp/extension/
+          cp -r popup /tmp/extension/
+
+      - name: Pack extension
+        run: |
+          google-chrome --pack-extension=/tmp/extension --pack-extension-key=key.pem
+          mv /tmp/extension.crx world-clock.crx
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: world-clock.crx
