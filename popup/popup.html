@@ -44,6 +44,27 @@
       color: #555;
       margin-top: 4px;
     }
+
+    #second-label {
+      cursor: pointer;
+    }
+
+    #second-label:hover {
+      color: #aaa;
+    }
+
+    #tz-select {
+      display: none;
+      width: 100%;
+      background: #1a1a2e;
+      color: #ccc;
+      border: 1px solid #333;
+      border-radius: 3px;
+      font-size: 10px;
+      font-family: inherit;
+      padding: 2px 4px;
+      margin-bottom: 4px;
+    }
   </style>
 </head>
 <body>
@@ -54,9 +75,10 @@
   </div>
 
   <div class="clock">
-    <div class="label">Madrid</div>
-    <div class="time" id="madrid-time">--:--:--</div>
-    <div class="date" id="madrid-date"></div>
+    <div class="label" id="second-label">Madrid ▾</div>
+    <select id="tz-select"></select>
+    <div class="time" id="second-time">--:--:--</div>
+    <div class="date" id="second-date"></div>
   </div>
 
   <script src="popup.js"></script>

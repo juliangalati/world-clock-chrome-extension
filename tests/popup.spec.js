@@ -43,17 +43,17 @@ test('popup renders local and Madrid clocks', async () => {
   await expect(localLabel).not.toHaveText('Local'); // replaced by JS
   await expect(localLabel).toBeVisible();
 
-  // Madrid label
-  await expect(page.locator('.label').nth(1)).toHaveText('Madrid');
+  // Madrid label (has a ▾ suffix)
+  await expect(page.locator('.label').nth(1)).toContainText('Madrid');
 
   // Times should be populated (HH:MM:SS pattern)
   const timeRegex = /^\d{2}:\d{2}:\d{2}$/;
   await expect(page.locator('#local-time')).toHaveText(timeRegex);
-  await expect(page.locator('#madrid-time')).toHaveText(timeRegex);
+  await expect(page.locator('#second-time')).toHaveText(timeRegex);
 
   // Dates should be populated (e.g. "Wed, 25 Mar")
   await expect(page.locator('#local-date')).not.toBeEmpty();
-  await expect(page.locator('#madrid-date')).not.toBeEmpty();
+  await expect(page.locator('#second-date')).not.toBeEmpty();
 });
 
 test('clock updates every second', async () => {
@@ -76,7 +76,7 @@ test('Madrid time is different from local time (unless you are in Madrid)', asyn
   await page.goto(`chrome-extension://${extensionId}/popup/popup.html`);
 
   const localTime = await page.locator('#local-time').textContent();
-  const madridTime = await page.locator('#madrid-time').textContent();
+  const secondTime = await page.locator('#second-time').textContent();
 
-  expect(localTime).not.toEqual(madridTime);
+  expect(localTime).not.toEqual(secondTime);
 });
