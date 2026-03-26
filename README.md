@@ -1,4 +1,4 @@
-# ![World Clock icon](screenshots/icon.png) World Clock Chrome Extension
+# <img src="screenshots/icon.png" width="32" height="32" valign="middle"> World Clock Chrome Extension
 
 A Chrome extension that displays your local time alongside a second timezone of your choosing.
 
