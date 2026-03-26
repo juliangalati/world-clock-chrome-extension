@@ -115,26 +115,41 @@ function drawClockIcon() {
   const ctx = canvas.getContext('2d');
   const cx = size / 2;
   const cy = size / 2;
-  const r = size / 2 - 1;
+  const r = size / 2 - 1.5;
 
   const now = new Date();
   const hours = (now.getHours() % 12) + now.getMinutes() / 60;
   const minutes = now.getMinutes() + now.getSeconds() / 60;
 
-  // Face
-  ctx.fillStyle = '#1a73e8';
+  // White face
+  ctx.fillStyle = '#ffffff';
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, Math.PI * 2);
   ctx.fill();
 
-  // Rim
-  ctx.strokeStyle = 'rgba(255,255,255,0.5)';
-  ctx.lineWidth = 1;
+  // Blue ring
+  ctx.strokeStyle = '#1a73e8';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI * 2);
   ctx.stroke();
+
+  // Hour markers at 12, 3, 6, 9
+  for (let i = 0; i < 4; i++) {
+    const angle = (i / 4) * Math.PI * 2 - Math.PI / 2;
+    ctx.fillStyle = '#1a73e8';
+    ctx.beginPath();
+    ctx.arc(
+      cx + Math.cos(angle) * (r - 3.5),
+      cy + Math.sin(angle) * (r - 3.5),
+      1.5, 0, Math.PI * 2
+    );
+    ctx.fill();
+  }
 
   /** @param {number} angle  @param {number} length  @param {number} width */
   function drawHand(angle, length, width) {
-    ctx.strokeStyle = '#ffffff';
+    ctx.strokeStyle = '#1a73e8';
     ctx.lineWidth = width;
     ctx.lineCap = 'round';
     ctx.beginPath();
@@ -147,10 +162,10 @@ function drawClockIcon() {
   }
 
   drawHand((hours / 12) * Math.PI * 2 - Math.PI / 2, r * 0.50, 2.5);
-  drawHand((minutes / 60) * Math.PI * 2 - Math.PI / 2, r * 0.72, 1.5);
+  drawHand((minutes / 60) * Math.PI * 2 - Math.PI / 2, r * 0.70, 1.5);
 
   // Center dot
-  ctx.fillStyle = '#ffffff';
+  ctx.fillStyle = '#1a73e8';
   ctx.beginPath();
   ctx.arc(cx, cy, 2, 0, Math.PI * 2);
   ctx.fill();
