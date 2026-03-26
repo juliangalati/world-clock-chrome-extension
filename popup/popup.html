@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 210px;
+      padding: 16px;
+      background: #0f0f1a;
+      color: #fff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    .clock {
+      padding: 10px 0;
+    }
+
+    .clock + .clock {
+      border-top: 1px solid #222;
+    }
+
+    .label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 4px;
+    }
+
+    .time {
+      font-size: 30px;
+      font-weight: 300;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .date {
+      font-size: 11px;
+      color: #555;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div class="label" id="local-label">Local</div>
+    <div class="time" id="local-time">--:--:--</div>
+    <div class="date" id="local-date"></div>
+  </div>
+
+  <div class="clock">
+    <div class="label">Madrid</div>
+    <div class="time" id="madrid-time">--:--:--</div>
+    <div class="date" id="madrid-date"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
