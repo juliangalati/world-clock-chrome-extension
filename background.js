@@ -51,9 +51,25 @@ function drawClockIcon() {
   return ctx.getImageData(0, 0, size, size);
 }
 
+function formatTime(date, timeZone) {
+  return date.toLocaleTimeString('en-GB', {
+    timeZone,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+}
+
 function updateIcon() {
   const imageData = drawClockIcon();
   chrome.action.setIcon({ imageData: { 32: imageData } });
+
+  const now = new Date();
+  const localTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const localLabel = localTZ.split('/').pop().replace(/_/g, ' ');
+  const localTime = formatTime(now, localTZ);
+  const madridTime = formatTime(now, 'Europe/Madrid');
+  chrome.action.setTitle({ title: `${localTime} — ${localLabel}\n${madridTime} — Madrid` });
 }
 
 chrome.runtime.onInstalled.addListener(updateIcon);
