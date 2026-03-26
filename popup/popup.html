@@ -6,88 +6,110 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      width: 210px;
-      padding: 16px;
-      background: #0f0f1a;
-      color: #fff;
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      width: 280px;
+      background: #ffffff;
+      color: #202124;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      font-size: 13px;
     }
 
     .clock {
-      padding: 10px 0;
+      padding: 12px 16px;
     }
 
     .clock + .clock {
-      border-top: 1px solid #222;
+      border-top: 1px solid #e8eaed;
     }
 
     .label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #5f6368;
       text-transform: uppercase;
-      color: #666;
-      margin-bottom: 4px;
+      letter-spacing: 0.8px;
+      margin-bottom: 3px;
     }
 
     .time {
-      font-size: 30px;
+      font-size: 34px;
       font-weight: 300;
       font-variant-numeric: tabular-nums;
-      letter-spacing: 1px;
-      color: #fff;
-      line-height: 1;
+      color: #202124;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
     }
 
     .date {
-      font-size: 11px;
-      color: #555;
-      margin-top: 4px;
+      font-size: 12px;
+      color: #80868b;
+      margin-top: 3px;
     }
 
     #second-label {
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     #second-label:hover {
-      color: #aaa;
+      color: #1a73e8;
+    }
+
+    #second-label::after {
+      content: '▾';
+      font-size: 9px;
+      color: #80868b;
     }
 
     #tz-search-container {
       display: none;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     #tz-search {
       width: 100%;
-      background: #1a1a2e;
-      color: #ccc;
-      border: 1px solid #333;
-      border-radius: 3px 3px 0 0;
-      font-size: 11px;
+      border: 1px solid #dadce0;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      font-size: 13px;
       font-family: inherit;
-      padding: 4px 6px;
+      padding: 6px 8px;
+      color: #202124;
+      background: #fff;
       outline: none;
+    }
+
+    #tz-search:focus {
+      border-color: #1a73e8;
+      border-bottom: none;
+      box-shadow: -1px 0 0 #1a73e8, 1px 0 0 #1a73e8, 0 -1px 0 #1a73e8;
     }
 
     #tz-list {
       list-style: none;
-      max-height: 120px;
+      max-height: 160px;
       overflow-y: auto;
-      border: 1px solid #333;
+      border: 1px solid #dadce0;
       border-top: none;
-      border-radius: 0 0 3px 3px;
+      border-radius: 0 0 4px 4px;
+      box-shadow: 0 2px 6px rgba(60, 64, 67, 0.15);
+    }
+
+    #tz-search:focus + #tz-list,
+    #tz-list {
+      border-color: inherit;
     }
 
     #tz-list li {
-      padding: 3px 6px;
-      font-size: 11px;
-      color: #ccc;
+      padding: 6px 8px;
+      font-size: 13px;
+      color: #202124;
       cursor: pointer;
     }
 
     #tz-list li:hover {
-      background: #2a2a4e;
+      background: #f1f3f4;
     }
   </style>
 </head>
@@ -99,7 +121,7 @@
   </div>
 
   <div class="clock">
-    <div class="label" id="second-label">Madrid ▾</div>
+    <div class="label" id="second-label">Madrid</div>
     <div id="tz-search-container">
       <input id="tz-search" type="text" placeholder="Search city…" autocomplete="off">
       <ul id="tz-list"></ul>

@@ -142,7 +142,7 @@ function update() {
 
 function setSecondTz(tz) {
   secondTz = tz;
-  document.getElementById('second-label').textContent = labelFor(tz) + ' ▾';
+  document.getElementById('second-label').textContent = labelFor(tz);
   update();
 }
 

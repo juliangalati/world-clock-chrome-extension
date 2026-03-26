@@ -43,7 +43,7 @@ test('popup renders local and Madrid clocks', async () => {
   await expect(localLabel).not.toHaveText('Local'); // replaced by JS
   await expect(localLabel).toBeVisible();
 
-  // Madrid label (has a ▾ suffix)
+  // Second clock label
   await expect(page.locator('.label').nth(1)).toContainText('Madrid');
 
   // Times should be populated (HH:MM:SS pattern)
