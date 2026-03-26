@@ -72,12 +72,8 @@ test('tooltip updates immediately when timezone is changed', async () => {
   const page = await context.newPage();
   await page.goto(`chrome-extension://${extensionId}/popup/popup.html`);
 
-  // Trigger a timezone change to Tokyo via the select
-  await page.evaluate(() => {
-    const sel = document.getElementById('tz-select');
-    sel.value = 'Asia/Tokyo';
-    sel.dispatchEvent(new Event('change'));
-  });
+  // Change timezone to Tokyo via storage (simulates a user selection)
+  await page.evaluate(() => chrome.storage.sync.set({ secondTz: 'Asia/Tokyo' }));
 
   // Give the storage change time to propagate to the background service worker
   await page.waitForTimeout(500);
@@ -86,11 +82,7 @@ test('tooltip updates immediately when timezone is changed', async () => {
   expect(title).toContain('Tokyo');
 
   // Restore Madrid for other tests
-  await page.evaluate(() => {
-    const sel = document.getElementById('tz-select');
-    sel.value = 'Europe/Madrid';
-    sel.dispatchEvent(new Event('change'));
-  });
+  await page.evaluate(() => chrome.storage.sync.set({ secondTz: 'Europe/Madrid' }));
   await page.waitForTimeout(500);
 });
 

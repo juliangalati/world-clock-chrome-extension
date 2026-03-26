@@ -53,17 +53,41 @@
       color: #aaa;
     }
 
-    #tz-select {
+    #tz-search-container {
       display: none;
+      margin-bottom: 4px;
+    }
+
+    #tz-search {
       width: 100%;
       background: #1a1a2e;
       color: #ccc;
       border: 1px solid #333;
-      border-radius: 3px;
-      font-size: 10px;
+      border-radius: 3px 3px 0 0;
+      font-size: 11px;
       font-family: inherit;
-      padding: 2px 4px;
-      margin-bottom: 4px;
+      padding: 4px 6px;
+      outline: none;
+    }
+
+    #tz-list {
+      list-style: none;
+      max-height: 120px;
+      overflow-y: auto;
+      border: 1px solid #333;
+      border-top: none;
+      border-radius: 0 0 3px 3px;
+    }
+
+    #tz-list li {
+      padding: 3px 6px;
+      font-size: 11px;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    #tz-list li:hover {
+      background: #2a2a4e;
     }
   </style>
 </head>
@@ -76,7 +100,10 @@
 
   <div class="clock">
     <div class="label" id="second-label">Madrid ▾</div>
-    <select id="tz-select"></select>
+    <div id="tz-search-container">
+      <input id="tz-search" type="text" placeholder="Search city…" autocomplete="off">
+      <ul id="tz-list"></ul>
+    </div>
     <div class="time" id="second-time">--:--:--</div>
     <div class="date" id="second-date"></div>
   </div>

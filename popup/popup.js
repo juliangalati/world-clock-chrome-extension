@@ -1,44 +1,44 @@
 const TIMEZONES = [
-  { tz: 'America/Anchorage',              label: 'Anchorage'     },
-  { tz: 'Europe/Athens',                  label: 'Athens'        },
-  { tz: 'Pacific/Auckland',               label: 'Auckland'      },
-  { tz: 'Asia/Bangkok',                   label: 'Bangkok'       },
-  { tz: 'Europe/Berlin',                  label: 'Berlin'        },
-  { tz: 'America/Bogota',                 label: 'Bogotá'        },
-  { tz: 'America/Argentina/Buenos_Aires', label: 'Buenos Aires'  },
-  { tz: 'Africa/Cairo',                   label: 'Cairo'         },
-  { tz: 'America/Chicago',                label: 'Chicago'       },
-  { tz: 'America/Denver',                 label: 'Denver'        },
-  { tz: 'Asia/Dhaka',                     label: 'Dhaka'         },
-  { tz: 'Asia/Dubai',                     label: 'Dubai'         },
-  { tz: 'Pacific/Fiji',                   label: 'Fiji'          },
-  { tz: 'America/Halifax',                label: 'Halifax'       },
-  { tz: 'Europe/Helsinki',                label: 'Helsinki'      },
   { tz: 'Pacific/Honolulu',               label: 'Honolulu'      },
-  { tz: 'Africa/Johannesburg',            label: 'Johannesburg'  },
-  { tz: 'Asia/Karachi',                   label: 'Karachi'       },
-  { tz: 'Asia/Kolkata',                   label: 'Kolkata'       },
-  { tz: 'Europe/Lisbon',                  label: 'Lisbon'        },
-  { tz: 'Europe/London',                  label: 'London'        },
+  { tz: 'America/Anchorage',              label: 'Anchorage'     },
   { tz: 'America/Los_Angeles',            label: 'Los Angeles'   },
-  { tz: 'Europe/Madrid',                  label: 'Madrid'        },
-  { tz: 'America/Mexico_City',            label: 'Mexico City'   },
-  { tz: 'Europe/Moscow',                  label: 'Moscow'        },
-  { tz: 'Africa/Nairobi',                 label: 'Nairobi'       },
+  { tz: 'America/Denver',                 label: 'Denver'        },
+  { tz: 'America/Chicago',                label: 'Chicago'       },
   { tz: 'America/New_York',               label: 'New York'      },
-  { tz: 'Europe/Paris',                   label: 'Paris'         },
-  { tz: 'Atlantic/Reykjavik',             label: 'Reykjavik'     },
-  { tz: 'Europe/Rome',                    label: 'Rome'          },
-  { tz: 'America/Santiago',               label: 'Santiago'      },
-  { tz: 'America/Sao_Paulo',              label: 'São Paulo'     },
-  { tz: 'Asia/Seoul',                     label: 'Seoul'         },
-  { tz: 'Asia/Shanghai',                  label: 'Shanghai'      },
-  { tz: 'Asia/Singapore',                 label: 'Singapore'     },
+  { tz: 'America/Halifax',                label: 'Halifax'       },
   { tz: 'America/St_Johns',               label: "St. John's"    },
-  { tz: 'Australia/Sydney',               label: 'Sydney'        },
-  { tz: 'Asia/Tokyo',                     label: 'Tokyo'         },
+  { tz: 'America/Sao_Paulo',              label: 'São Paulo'     },
+  { tz: 'America/Argentina/Buenos_Aires', label: 'Buenos Aires'  },
+  { tz: 'America/Santiago',               label: 'Santiago'      },
+  { tz: 'America/Bogota',                 label: 'Bogotá'        },
+  { tz: 'America/Mexico_City',            label: 'Mexico City'   },
   { tz: 'America/Toronto',                label: 'Toronto'       },
   { tz: 'America/Vancouver',              label: 'Vancouver'     },
+  { tz: 'Atlantic/Reykjavik',             label: 'Reykjavik'     },
+  { tz: 'Europe/London',                  label: 'London'        },
+  { tz: 'Europe/Lisbon',                  label: 'Lisbon'        },
+  { tz: 'Europe/Madrid',                  label: 'Madrid'        },
+  { tz: 'Europe/Paris',                   label: 'Paris'         },
+  { tz: 'Europe/Berlin',                  label: 'Berlin'        },
+  { tz: 'Europe/Rome',                    label: 'Rome'          },
+  { tz: 'Europe/Athens',                  label: 'Athens'        },
+  { tz: 'Europe/Helsinki',                label: 'Helsinki'      },
+  { tz: 'Europe/Moscow',                  label: 'Moscow'        },
+  { tz: 'Africa/Cairo',                   label: 'Cairo'         },
+  { tz: 'Africa/Nairobi',                 label: 'Nairobi'       },
+  { tz: 'Africa/Johannesburg',            label: 'Johannesburg'  },
+  { tz: 'Asia/Dubai',                     label: 'Dubai'         },
+  { tz: 'Asia/Karachi',                   label: 'Karachi'       },
+  { tz: 'Asia/Kolkata',                   label: 'Kolkata'       },
+  { tz: 'Asia/Dhaka',                     label: 'Dhaka'         },
+  { tz: 'Asia/Bangkok',                   label: 'Bangkok'       },
+  { tz: 'Asia/Shanghai',                  label: 'Shanghai'      },
+  { tz: 'Asia/Singapore',                 label: 'Singapore'     },
+  { tz: 'Asia/Tokyo',                     label: 'Tokyo'         },
+  { tz: 'Asia/Seoul',                     label: 'Seoul'         },
+  { tz: 'Australia/Sydney',               label: 'Sydney'        },
+  { tz: 'Pacific/Auckland',               label: 'Auckland'      },
+  { tz: 'Pacific/Fiji',                   label: 'Fiji'          },
 ];
 
 const DEFAULT_TZ = 'Europe/Madrid';
@@ -86,12 +86,35 @@ function update() {
 function setSecondTz(tz) {
   secondTz = tz;
   document.getElementById('second-label').textContent = labelFor(tz) + ' ▾';
-  document.getElementById('tz-select').value = tz;
   update();
 }
 
-function collapseSelect() {
-  document.getElementById('tz-select').style.display = 'none';
+const tzSearch = document.getElementById('tz-search');
+const tzList = document.getElementById('tz-list');
+
+function renderList(query) {
+  const results = query
+    ? TIMEZONES.filter(t => t.label.toLowerCase().includes(query.toLowerCase()))
+    : TIMEZONES;
+  tzList.innerHTML = '';
+  for (const { tz, label } of results) {
+    const li = document.createElement('li');
+    li.textContent = label;
+    li.dataset.tz = tz;
+    tzList.appendChild(li);
+  }
+}
+
+function showSearch() {
+  document.getElementById('second-label').style.display = 'none';
+  document.getElementById('tz-search-container').style.display = 'block';
+  tzSearch.value = '';
+  renderList('');
+  tzSearch.focus();
+}
+
+function collapseSearch() {
+  document.getElementById('tz-search-container').style.display = 'none';
   document.getElementById('second-label').style.display = '';
 }
 
@@ -99,30 +122,21 @@ function collapseSelect() {
 document.getElementById('local-label').textContent =
   localTZ.split('/').pop().replace(/_/g, ' ');
 
-// Populate select options
-const sel = document.getElementById('tz-select');
-for (const { tz, label } of TIMEZONES) {
-  const opt = document.createElement('option');
-  opt.value = tz;
-  opt.textContent = label;
-  sel.appendChild(opt);
-}
+document.getElementById('second-label').addEventListener('click', showSearch);
 
-// Label click → show select
-document.getElementById('second-label').addEventListener('click', () => {
-  document.getElementById('second-label').style.display = 'none';
-  sel.style.display = 'block';
-  sel.focus();
+tzSearch.addEventListener('input', () => renderList(tzSearch.value));
+tzSearch.addEventListener('blur', collapseSearch);
+tzSearch.addEventListener('keydown', (e) => { if (e.key === 'Escape') collapseSearch(); });
+
+// mousedown prevents blur on the input when clicking a list item
+tzList.addEventListener('mousedown', (e) => e.preventDefault());
+tzList.addEventListener('click', (e) => {
+  const li = e.target.closest('li');
+  if (!li) return;
+  chrome.storage.sync.set({ [STORAGE_KEY]: li.dataset.tz });
+  setSecondTz(li.dataset.tz);
+  collapseSearch();
 });
-
-// Select change → save and collapse
-sel.addEventListener('change', () => {
-  chrome.storage.sync.set({ [STORAGE_KEY]: sel.value });
-  setSecondTz(sel.value);
-  collapseSelect();
-});
-
-sel.addEventListener('blur', collapseSelect);
 
 async function init() {
   const result = await chrome.storage.sync.get(STORAGE_KEY);
