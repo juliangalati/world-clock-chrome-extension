@@ -127,6 +127,7 @@ async function updateIcon() {
 
 chrome.runtime.onInstalled.addListener(updateIcon);
 chrome.runtime.onStartup.addListener(updateIcon);
+chrome.storage.onChanged.addListener(updateIcon);
 
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === 'tick') updateIcon();
