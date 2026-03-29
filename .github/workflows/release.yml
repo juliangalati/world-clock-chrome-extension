@@ -33,7 +33,12 @@ jobs:
           google-chrome --pack-extension=/tmp/extension --pack-extension-key=key.pem
           mv /tmp/extension.crx world-clock.crx
 
+      - name: Build zip
+        run: zip -r world-clock.zip manifest.json background.js popup/
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: world-clock.crx
+          files: |
+            world-clock.crx
+            world-clock.zip
